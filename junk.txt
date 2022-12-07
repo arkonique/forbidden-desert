@@ -1,0 +1,20 @@
+            <div class="players">
+                <div class="player player--1">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+                <div class="player player--2">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+                <div class="player player--3">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+                <div class="player player--4">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+                <div class="player player--5">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+                <div class="player player--6">
+                    <img src="meeple-svgrepo-com.svg" />
+                </div>
+            </div>
