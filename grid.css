@@ -1,0 +1,12 @@
+.grid {
+    --grid-size: 48vw;
+    --gap: 11px;
+    width: var(--grid-size);
+    height: var(--grid-size);
+    display: grid;
+    grid-template-columns: repeat(5, calc(100% / 5 - var(--gap)));
+    grid-template-rows: repeat(5, calc(100% / 5 - var(--gap)));
+    row-gap: var(--gap);
+    column-gap: var(--gap);
+    box-sizing: border-box;
+}

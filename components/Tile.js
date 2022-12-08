@@ -1,3 +1,5 @@
+// Description: Tile class for the game board
+
 class Tile {
   front = "blank"; // Blank, Water, Crash
   back = "gear"; // Gear, Water, Tunnel, Piece, Launchpad
@@ -8,11 +10,29 @@ class Tile {
   html; // HTML element
   id; // Unique ID
 
-  constructor(id, front, back, players, sand, state, position) {
+  constructor(id, front, back, players, sand, state, position,gearno) {
     const frontImg = {
       blank: "tile_front.png",
       water: "tile_front_water.png",
       crash: "tile_front_crash.png",
+      storm: "tile_front_storm.png",
+    };
+
+    const backImg = {
+        gear: `tile_back_gear_${gearno}.png`,
+        water: "tile_back_water.png",
+        tunnel: "tile_back_tunnel.png",
+        compassX: "tile_back_compassX.png",
+        compassY: "tile_back_compassY.png",
+        fanX: "tile_back_fanX.png",
+        fanY: "tile_back_fanY.png",
+        engineX: "tile_back_engineX.png",
+        engineY: "tile_back_engineY.png",
+        obeliskX: "tile_back_obeliskX.png",
+        obeliskY: "tile_back_obeliskY.png",
+        mirage: "tile_back_mirage.png",
+        launchpad: "tile_back_launchpad.png",
+        storm: "tile_front_storm.png"
     };
 
     this.id = id;
@@ -29,6 +49,7 @@ class Tile {
                 class="tile" 
                 data-position-x=${position.x} 
                 data-position-y=${position.y}
+                data-is-storm=${front==="storm"?"true":"false"}
             >
             <div class="tile__inner">
             <div class="tile__face tile__face--front">
@@ -38,10 +59,30 @@ class Tile {
             </div>
             <div class="tile__face tile__face--back">
                 <img
-                src="https://i.picsum.photos/id/638/800/800.jpg?hmac=gzm6YwClaSh2J8N3d90Wz0LFzgkaqNTlbcipp1Py8bU"
+                src="${backImg[back]}"
                 />
             </div>
             </div>
+            <div class="players">
+            <div class="player player--1">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+            <div class="player player--2">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+            <div class="player player--3">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+            <div class="player player--4">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+            <div class="player player--5">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+            <div class="player player--6">
+                <img src="meeple-svgrepo-com.svg" />
+            </div>
+        </div>
             <div class="sands">
             <div class="sand__count">
                 <span>${sand}</span>
@@ -54,32 +95,8 @@ class Tile {
         `;
   }
 
-  // if new tile is created, run some code
-  init() {
-    // if sand is 0, make sand count invisible
-    if (this.sand === 0) {
-      document
-        .getElementById(this.id)
-        .querySelector(".sand__count span").innerHTML = "";
-    }
-    // rotate each sand token by a random amount between -10 and 10 degrees in multiples of 3
-    document
-        .getElementById(this.id)
-        .querySelectorAll(".sand__token").forEach((sand) => {
-            sand.style.transform = `rotate(${Math.floor(Math.random() * 7) * 3 - 10}deg)`;
-        });
-
-    // add event listener to tile
-    document.getElementById(this.id).addEventListener("click", () => {
-      this.reduceSand();
-      if (this.canExcavate()) {
-        this.excavate();
-      }
-    });
-  }
-
   reduceSand() {
-    if (this.sand === 0) {
+    if (this.sand === -1) {
       return;
     }
     this.sand--;
@@ -87,11 +104,12 @@ class Tile {
       .getElementById(this.id)
       .querySelector(".sand__count span").innerHTML = this.sand;
     // if sand goes to 0, make sand count invisible
-    if (this.sand === 0) {
+    if (this.sand <= 0) {
       document
         .getElementById(this.id)
         .querySelector(".sand__count span").innerHTML = "";
     }
+    if(this.sand<0) return;
     document.querySelector(`#${this.id} .sand`).remove();
   }
 
@@ -129,7 +147,7 @@ class Tile {
     if (this.state === 1) {
       return false;
     }
-    if (this.sand === 0) {
+    if (this.sand === -1) {
       return true;
     }
     return false;
