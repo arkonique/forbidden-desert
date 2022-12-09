@@ -8,5 +8,6 @@
     grid-template-rows: repeat(5, calc(100% / 5 - var(--gap)));
     row-gap: var(--gap);
     column-gap: var(--gap);
+    position: relative;
     box-sizing: border-box;
 }

@@ -23,7 +23,8 @@ class Deck {
     }
     discard(card) {
         this.discarded.push(card);
-        this.deck = this.deck.filter((c) => c !== card);
+        // remove only one instance of card from deck
+        this.deck.splice(this.deck.indexOf(card), 1);
         return this;
     }
 }

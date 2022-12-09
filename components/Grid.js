@@ -113,17 +113,16 @@ class Grid {
 
   // Initialize the grid
   init() {
-    console.table(this.fronts);
+    /*console.table(this.fronts);
     console.table(this.backs);
     console.table(this.players);
     console.table(this.sands);
     console.table(this.states);
-    console.table(this.tiles);
+    console.table(this.tiles);*/
 
     // add event listeners
     this.tiles.forEach((row, i) => {
       row.forEach((tile, j) => {
-        console.log(tile);
         // initialize tile
         if (tile.sand === 0) {
           document
@@ -284,5 +283,15 @@ class Grid {
       }
     }
     this.html += `</div>`;
+  }
+
+  totalSand() {
+    let total = 0;
+    this.tiles.forEach((row) => {
+      row.forEach((tile) => {
+        total += tile.sand;
+      });
+    });
+    return total;
   }
 }

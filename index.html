@@ -10,23 +10,34 @@
       crossorigin="anonymous"
     ></script>
     <!-- Styles -->
+    <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="grid.css" />
     <link rel="stylesheet" href="tile.css" />
+    <link rel="stylesheet" href="sand.css" />
     <!-- End styles -->
     <script src="functions.js"></script>
     <!-- Components -->
+    <script src="components/Deck.js" defer></script>
     <script src="components/Tile.js" defer></script>
     <script src="components/Grid.js" defer></script>
     <!-- End components -->
     <script src="App.js" defer></script>
   </head>
+
   <body>
-    <div id="app"></div>
-    <button onclick="moveUp2()">Move test (2 tiles up)</button>
-    <button onclick="moveLeft2()">Move test (2 tiles left)</button>
-    <div class="sand__meter">
-      <div class="sand__meter__bar">
-        <div class="sand__meter__bar__fill"></div>
+    <div class="app">
+      <div id="board"></div>
+      <div class="ui">
+        <button onclick="moveUp2()">Move test (2 tiles up)</button>
+        <button onclick="moveLeft2()">Move test (2 tiles left)</button>
+        <div class="sand__container">
+            <span class="sand__title">Sands left: (40/48)</span>
+            <div class="sand__meter">
+              <div class="sand__meter__bar">
+                <div class="sand__meter__bar__fill"></div>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
   </body>

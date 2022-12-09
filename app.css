@@ -1,0 +1,15 @@
+.app {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.board {
+    width: 50%;
+    position: relative;
+}
+
+.ui {
+    width: 50%;
+    position: relative;
+}

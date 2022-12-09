@@ -1,16 +1,20 @@
-const app = document.getElementById('app');
-const grid = new Grid('default');
+const app = document.getElementById("board");
+const grid = new Grid("default");
 app.innerHTML = grid.html;
 grid.init();
 
+let stormCards = createStormDeck();
+let stormDeck = new Deck(stormCards, []);
+stormDeck.shuffle();
+
+let gearCards = createGearDeck("y");
+let gearDeck = new Deck(gearCards, []);
+gearDeck.shuffle();
+
 function moveUp2() {
-    grid.moveStorm('up',2)
-    app.innerHTML = grid.html;
-    grid.init();
+    moveGrid("up", 2, app, grid);
 }
 
 function moveLeft2() {
-    grid.moveStorm('left',2)
-    app.innerHTML = grid.html;
-    grid.init();
+    moveGrid("left", 2, app, grid);
 }
