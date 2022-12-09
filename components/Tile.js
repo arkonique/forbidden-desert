@@ -46,10 +46,10 @@ class Tile {
     this.html = `
             <div 
                 id="${id}"    
-                class="tile" 
+                class="tile ${front} ${back}" 
                 data-position-x=${position.x} 
                 data-position-y=${position.y}
-                data-is-storm=${front==="storm"?"true":"false"}
+                data-is-storm=${front==="storm"?true:false}
             >
             <div class="tile__inner">
             <div class="tile__face tile__face--front">
@@ -115,6 +115,7 @@ class Tile {
 
   excavate() {
     this.state = 1;
+    this.sand = 0;
     document.getElementById(this.id).classList.add("excavated");
   }
 
@@ -124,18 +125,6 @@ class Tile {
 
   removePlayer(player) {
     this.players = this.players.filter((p) => p.id !== player.id);
-  }
-
-  addSand() {
-    this.sand++;
-    document
-      .getElementById(this.id)
-      .querySelector(".sand__count span").innerHTML = this.sand;
-    document.getElementById(this.id).querySelector(".sands").innerHTML += `
-        <div class="sand">
-            <div class="sand__token"></div>
-        </div>
-        `;
   }
 
   moveTile(x, y) {

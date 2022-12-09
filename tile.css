@@ -12,6 +12,12 @@
     position: relative;
     perspective: 1000px;
     filter: drop-shadow(0px 0px 2px black);
+    transition: 0.2s;
+}
+
+.tile:hover{
+    transform: scale(1.6);
+    z-index: 1;
 }
 
 .tile__inner {
@@ -37,6 +43,226 @@
     overflow: hidden;
 }
 
+.tile__face::before {
+    content: '';
+    display: block;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: 27% 65%;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 100% 0 0;
+    border: 5px solid #ffc312;
+    border-bottom: 0;
+    border-left: 0;
+    background-color: #fff;
+}
+
+.tile__face::after {
+    content: '';
+    display: block;
+    background-size: cover;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 100% 0 0 0;
+    border: 5px solid white;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.blank .tile__face::before {
+    display: none;
+}
+
+.blank .tile__face::before {
+    display: none;
+}
+
+.crash .tile__face::before {
+    display: none;
+}
+
+.storm .tile__face::before {
+    display: none;
+}
+
+.blank .tile__face::after {
+    display: none;
+}
+
+.blank .tile__face::after {
+    display: none;
+}
+
+.crash .tile__face::after {
+    display: none;
+}
+
+.storm .tile__face::after {
+    display: none;
+}
+
+.water .tile__face::before {
+    display: none;
+}
+
+.water .tile__face--front::after {
+    --size: 15%;
+    border: 0;
+    background: url('droplet-solid.svg');
+    background-repeat: no-repeat;
+    border-radius: 0;
+    width: var(--size);
+    height: var(--size);
+    bottom: 3%;
+    filter: invert(60%) sepia(18%) saturate(6592%) hue-rotate(159deg) brightness(100%) contrast(108%) drop-shadow(2px 4px 6px black);
+}
+
+.tile__face--back::after {
+    --size: 30%;
+    background-repeat: no-repeat;
+    width: var(--size);
+    height: var(--size);
+    background-color: white;
+    /* background-position-x: -8%; */
+    background-size: 50%;
+    background-position: 65% 65%;
+    border-color: #ffc312;
+}
+
+.water .tile__face--back::after {
+    background-image: url('droplet-solid.svg');
+}
+
+.gear .tile__face--back::after {
+    display: block;
+    background-image: url('gears-solid.svg');
+}
+
+.tunnel .tile__face--back::after {
+    display: block;
+    background-image: url('gears-solid.svg');
+}
+
+.tunnel .tile__face--back::before {
+    display: block;
+    background-image: url('archway-solid.svg');
+}
+
+.mirage .tile__face--back::after {
+    display: none;
+}
+
+.compassX .tile__face--back::after {
+    display: block;
+    background-image: url('compass.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.compassY .tile__face--back::after {
+    display: block;
+    background-image: url('compass.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.engineX .tile__face--back::after {
+    display: block;
+    background-image: url('engine.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.engineY .tile__face--back::after {
+    display: block;
+    background-image: url('engine.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.fanX .tile__face--back::after {
+    display: block;
+    background-image: url('fan.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.fanY .tile__face--back::after {
+    display: block;
+    background-image: url('fan.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.obeliskX .tile__face--back::after {
+    display: block;
+    background-image: url('obelisk.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
+.obeliskY .tile__face--back::after {
+    display: block;
+    background-image: url('obelisk.jpeg');
+    background-size: 100%;
+    /* background-position: center; */
+    transform: scaleX(-1);
+    border-radius: 0 100% 0 0;
+    border: 5px solid;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: #ffc312;
+}
+
 img {
     width: 100%;
     height: 100%;
@@ -57,7 +283,7 @@ img {
 
 .tile[data-is-storm='true'] .tile__face {
     border-radius: 100%;
-    display: none;
+    /* display: none; */
 }
 
 .players {

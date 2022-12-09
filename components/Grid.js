@@ -19,15 +19,16 @@ class Grid {
   ) {
     // Default values
     if (tiles === "default") {
-      this.sands[0][2] =
-        this.sands[1][1] =
-        this.sands[1][3] =
-        this.sands[2][0] =
-        this.sands[2][4] =
-        this.sands[3][1] =
-        this.sands[3][3] =
-        this.sands[4][2] =
-          1;
+      [
+        this.sands[0][2],
+        this.sands[1][1],
+        this.sands[1][3],
+        this.sands[2][0],
+        this.sands[2][4],
+        this.sands[3][1],
+        this.sands[3][3],
+        this.sands[4][2],
+      ] = [1, 1, 1, 1, 1, 1, 1, 1];
 
       // generate four random grid positions
       let randomPositions = randomPosition(4);
@@ -112,16 +113,17 @@ class Grid {
 
   // Initialize the grid
   init() {
-    /*     console.table(this.fronts);
+    console.table(this.fronts);
     console.table(this.backs);
     console.table(this.players);
     console.table(this.sands);
     console.table(this.states);
-    console.table(this.tiles); */
+    console.table(this.tiles);
 
     // add event listeners
     this.tiles.forEach((row, i) => {
       row.forEach((tile, j) => {
+        console.log(tile);
         // initialize tile
         if (tile.sand === 0) {
           document
@@ -145,6 +147,7 @@ class Grid {
             if (tile.canExcavate()) {
               tile.excavate();
             }
+            this.states[i][j] = tile.state;
           },
           true
         );
@@ -158,37 +161,128 @@ class Grid {
   moveStorm(direction, number) {
     // 1. Find the storm tile
     // 1.1. Find tile that has storm
-    let stormTile = this.tiles.find((row) => {
-      return row.find((tile) => {
-        return tile.front === "storm";
+    let stormTile = this.tiles
+      .find((row) => {
+        return row.find((tile) => {
+          return tile.front === "storm";
+        });
+      })
+      .find((tile) => {
+        return tile.front == "storm";
       });
-    });
     // 1.2. Find the row of the storm tile in the grid
-    let stormTileRow = this.tiles.indexOf(stormTile);
+    let stormTileRow = stormTile.position.x;
     // 1.3. Find the column of the storm tile in the row
-    let stormTileColumn = this.tiles[stormTileIndex].indexOf(stormTile);
+    let stormTileColumn = stormTile.position.y;
     // 2. Find all other affected tiles (Note: actual storm motion is opposite of direction)
     let affectedTiles;
-    if(direction === "up") {
+    if (direction === "up") {
       // 2.1. If storm is moving up, tiles below it are affected
-      affectedTiles = this.tiles.slice(stormTileRow + 1, stormTileRow + number + 1);
-    } else if(direction === "down") {
+      affectedTiles = this.tiles
+        .slice(stormTileRow + 1, stormTileRow + number + 1)
+        .map((row) => {
+          return row[stormTileColumn];
+        });
+    } else if (direction === "down") {
       // 2.2. If storm is moving down, tiles above it are affected
-      affectedTiles = this.tiles.slice(stormTileRow - number, stormTileRow);
-    } else if(direction === "left") {
+      affectedTiles = this.tiles
+        .slice(stormTileRow - number, stormTileRow)
+        .map((row) => {
+          return row[stormTileColumn];
+        });
+    } else if (direction === "left") {
       // 2.3. If storm is moving left, tiles to the right of it are affected
       affectedTiles = this.tiles.map((row) => {
         return row.slice(stormTileColumn + 1, stormTileColumn + number + 1);
       })[stormTileRow];
-    } else if(direction === "right") {
+    } else if (direction === "right") {
       // 2.4. If storm is moving right, tiles to the left of it are affected
       affectedTiles = this.tiles.map((row) => {
         return row.slice(stormTileColumn - number, stormTileColumn);
       })[stormTileRow];
     }
-    // 3. Move the storm tile
-    // 4. Move the affected tiles
-    // 5. Add sand to the affected tiles
-    // 6. Update the grid
+    // 2.5. make an array of all the tiles that are affected
+    let allAffectedTiles = [stormTile, ...affectedTiles];
+    let rotatedAllAffectedTiles = [
+      ...allAffectedTiles.slice(1),
+      allAffectedTiles[0],
+    ];
+    // 2.6. Add sand to the affected tiles except the storm tile
+    affectedTiles.forEach((tile) => {
+      tile.sand++;
+    });
+    // 3. Move the tiles
+    // 3.2. Update the grid
+    // 3.2.1. Get affected tile positions
+    let affectedTilePositions = allAffectedTiles.map((tile) => {
+      return tile.position;
+    });
+    // 3.2.2. Change elements in the tiles array based on affected tile positions
+    affectedTilePositions.forEach((position, i) => {
+      this.tiles[position.x][position.y] = rotatedAllAffectedTiles[i];
+    });
+    // 3.2.3. Change the position of the tiles
+    this.tiles.forEach((row, i) => {
+      row.forEach((tile, j) => {
+        tile.moveTile(i, j);
+      });
+    });
+    // 3.2.4. Change the front and back arrays
+    this.fronts = this.tiles.map((row) => {
+      return row.map((tile) => {
+        return tile.front;
+      });
+    });
+    this.backs = this.tiles.map((row) => {
+      return row.map((tile) => {
+        return tile.back;
+      });
+    });
+    // 3.2.5. Change the player array
+    this.players = this.tiles.map((row) => {
+      return row.map((tile) => {
+        return tile.players;
+      });
+    });
+    // 3.2.6. Change the sand array
+    this.sands = this.tiles.map((row) => {
+      return row.map((tile) => {
+        return tile.sand;
+      });
+    });
+    // 3.2.7. Change the state array
+    this.states = this.tiles.map((row) => {
+      return row.map((tile) => {
+        return tile.state;
+      });
+    });
+    // 4. Update the html
+    this.html = `<div class="grid">`;
+    let oldTiles = this.tiles;
+    let gearNo = 0;
+    let notGearNo = -1;
+    let passNo = 0;
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        if (this.backs[i][j] === "gear") {
+          gearNo++;
+          passNo = gearNo;
+        } else {
+          passNo = notGearNo;
+        }
+        this.tiles[i][j] = new Tile(
+          oldTiles[i][j].id,
+          this.fronts[i][j],
+          this.backs[i][j],
+          this.players[i][j],
+          this.sands[i][j],
+          this.states[i][j],
+          { x: i, y: j },
+          passNo
+        );
+        this.html += this.tiles[i][j].html;
+      }
+    }
+    this.html += `</div>`;
   }
 }
