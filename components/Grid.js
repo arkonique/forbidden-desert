@@ -119,7 +119,21 @@ class Grid {
     console.table(this.sands);
     console.table(this.states);
     console.table(this.tiles);*/
-
+    document.querySelector(".storm").classList.add("excavated");
+    // Make sand count of storm tile 0
+    // find storm tile
+    let stormTile = this.tiles
+      .find((row) => {
+        return row.find((tile) => {
+          return tile.front === "storm";
+        });
+      })
+      .find((tile) => {
+        return tile.front === "storm";
+      });
+    // set sand count to 0
+    stormTile.sand = 0;
+    this.sands[stormTile.position.x][stormTile.position.y] = 0;
     // add event listeners
     this.tiles.forEach((row, i) => {
       row.forEach((tile, j) => {
@@ -146,14 +160,18 @@ class Grid {
             if (tile.canExcavate()) {
               tile.excavate();
             }
+            // if tile.sand === -1 set this.sands[i][j] = 0 else set to tile.sand
+            this.sands[i][j] = tile.sand === -1 ? 0 : tile.sand;
             this.states[i][j] = tile.state;
+
+            updateSandMeter(this);
           },
           true
         );
       });
     });
-    // excavate storm
-    this.tiles[2][2].excavate();
+
+    updateSandMeter(this);
   }
 
   // Move grid

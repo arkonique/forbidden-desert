@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="grid.css" />
     <link rel="stylesheet" href="tile.css" />
     <link rel="stylesheet" href="sand.css" />
+    <link rel="stylesheet" href="card.css" />
     <!-- End styles -->
     <script src="functions.js"></script>
     <!-- Components -->
@@ -28,15 +29,14 @@
     <div class="app">
       <div id="board"></div>
       <div class="ui">
-        <button onclick="moveUp2()">Move test (2 tiles up)</button>
-        <button onclick="moveLeft2()">Move test (2 tiles left)</button>
+        <div id="decks"></div>
         <div class="sand__container">
-            <span class="sand__title">Sands left: (40/48)</span>
-            <div class="sand__meter">
-              <div class="sand__meter__bar">
-                <div class="sand__meter__bar__fill"></div>
-              </div>
+          <span class="sand__title">SANDS LEFT: (40/48)</span>
+          <div class="sand__meter">
+            <div class="sand__meter__bar">
+              <div class="sand__meter__bar__fill"></div>
             </div>
+          </div>
         </div>
       </div>
     </div>

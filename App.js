@@ -4,17 +4,14 @@ app.innerHTML = grid.html;
 grid.init();
 
 let stormCards = createStormDeck();
-let stormDeck = new Deck(stormCards, []);
+let stormDeck = new Deck(stormCards, [],"storm");
 stormDeck.shuffle();
 
 let gearCards = createGearDeck("y");
-let gearDeck = new Deck(gearCards, []);
+let gearDeck = new Deck(gearCards, [],"gear");
 gearDeck.shuffle();
 
-function moveUp2() {
-    moveGrid("up", 2, app, grid);
-}
-
-function moveLeft2() {
-    moveGrid("left", 2, app, grid);
-}
+console.log(stormDeck);
+let decks = document.getElementById("decks");
+decks.innerHTML += stormDeck.deckHtml;
+decks.innerHTML += gearDeck.deckHtml;

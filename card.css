@@ -1,0 +1,58 @@
+:root {
+    --card: 20%;
+}
+
+.deck{
+    display: grid;
+    filter: drop-shadow(0px 0px 6px black);
+    margin:30px;
+}
+
+.card {
+    width: var(--card);
+    position: relative;
+    perspective: 1000px;
+    /* filter: drop-shadow(0px 0px 6px black); */
+    transition: 0.2s;
+    height: auto;
+    border-radius: 40px;
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.card__inner {
+    width: 100%;
+    height: auto;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    display: grid;
+    position: relative;
+    border-radius: 20px;
+}
+.card__face {
+    width: 100%;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    transition: transform 0.5s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+
+.card__face--front {
+    z-index: 0;
+    grid-area: 1 / 1 / 2 / 2;
+    transform: rotateY(180deg);
+}
+
+.card__face--back {
+    z-index: 1;
+}
+
+.flipped .card__inner {
+    transform: rotateY(180deg);
+}

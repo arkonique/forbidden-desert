@@ -39,14 +39,15 @@ class Tile {
     this.front = front;
     this.back = back;
     this.players = players; //players will have an id and a color
-    this.sand = sand;
+    // if excavated and sand = -1, set sand = 0 else sand = sand
+    this.sand = state === 1 && sand === -1 ? 0 : sand;
     this.state = state;
     this.position.x = position.x;
     this.position.y = position.y;
     this.html = `
             <div 
                 id="${id}"    
-                class="tile ${front} ${back}" 
+                class="tile ${front} ${back} ${state === 1 ? "excavated" : ""}"
                 data-position-x=${position.x} 
                 data-position-y=${position.y}
                 data-is-storm=${front==="storm"?true:false}

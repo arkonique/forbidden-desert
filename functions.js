@@ -177,14 +177,12 @@ function updateSandMeter(grid) {
   let sandFill = document.querySelector(".sand__meter__bar__fill");
   let sandText = document.querySelector(".sand__title");
   let currentSand = grid.totalSand();
-  console.log(currentSand);
   sandFill.style.width = `${((48 - currentSand) * 100) / 48}%`;
-  sandText.innerHTML = `Sands left: (${48 - currentSand}/48)`;
+  sandText.innerHTML = `SANDS LEFT: (${48 - currentSand}/48)`;
 }
 
 function moveGrid(dir,num,app,grid) {
   grid.moveStorm(dir, num);
   app.innerHTML = grid.html;
   grid.init();
-  updateSandMeter(grid);
 }

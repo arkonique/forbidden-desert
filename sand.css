@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'LHR Firehouse';
+    font-style: normal;
+    src: url('LHF Fire House.ttf');
+}
+
 .sand__container {
     width: 100%;
     height: 40px;
@@ -8,18 +14,19 @@
 }
 
 .sand__title {
-    width: 20%;
+    width: 40%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 4rem;
+    /* font-weight: 600; */
     color: #111111;
+    font-family: 'LHR Firehouse';
 }
 
 .sand__meter {
-  width: 80%;
+  width: 60%;
   height: 100%;
   position: relative;
 }
