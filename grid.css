@@ -1,8 +1,8 @@
 .grid {
-    --grid-size: 48vw;
+    --grid-size: 100%;
     --gap: 11px;
     width: var(--grid-size);
-    height: var(--grid-size);
+    aspect-ratio: 1 / 1;
     display: grid;
     grid-template-columns: repeat(5, calc(100% / 5 - var(--gap)));
     grid-template-rows: repeat(5, calc(100% / 5 - var(--gap)));

@@ -1,15 +1,84 @@
+@font-face {
+    font-family: 'LHR Firehouse';
+    font-style: normal;
+    src: url('LHF Fire House.ttf');
+}
+
+body {
+  margin: 0;
+}
+
 .app {
-    display: flex;
-    width: 100%;
-    position: relative;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 
+    "Storm-meter Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
+    "Storm-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter"; 
+    height: 100vh;
 }
 
-.board {
-    width: 50%;
-    position: relative;
+#storm__meter {
+  grid-area: Storm-meter;
 }
 
-.ui {
-    width: 50%;
-    position: relative;
+
+#Title {
+  grid-area: Title;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-family: 'LHR Firehouse';
+  font-size: 5rem;
+  color: #e77800;
+}
+
+.sand__container {
+  grid-area: Sand-meter;
+}
+
+#water__level {
+  grid-area: Water-level;
+}
+
+#actions {
+  grid-area: Actions;
+}
+
+#storm__decks {
+  grid-area: Storm-deck;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#gear__decks {
+  grid-area: Gear-deck;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#ship {
+  grid-area: Ship;
+}
+
+#board {
+  grid-area: Board;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

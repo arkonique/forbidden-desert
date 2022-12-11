@@ -11,7 +11,9 @@ let gearCards = createGearDeck("y");
 let gearDeck = new Deck(gearCards, [],"gear");
 gearDeck.shuffle();
 
-console.log(stormDeck);
-let decks = document.getElementById("decks");
-decks.innerHTML += stormDeck.deckHtml;
-decks.innerHTML += gearDeck.deckHtml;
+let sdecks = document.getElementById("storm__decks");
+let gdecks = document.getElementById("gear__decks");
+sdecks.innerHTML = stormDeck.deckHtml;
+gdecks.innerHTML = gearDeck.deckHtml;
+
+stormMeter(3,"elite");

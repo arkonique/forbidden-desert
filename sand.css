@@ -1,48 +1,44 @@
-@font-face {
-    font-family: 'LHR Firehouse';
-    font-style: normal;
-    src: url('LHF Fire House.ttf');
-}
-
 .sand__container {
-    width: 100%;
-    height: 40px;
-    position: absolute;
-    display: flex;
-    bottom: 0;
-    align-items: center;
+  width: 100%;
+  height: calc(100vh / 12);
+  display: flex;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .sand__title {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    /* font-weight: 600; */
-    color: #111111;
-    font-family: 'LHR Firehouse';
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  /* font-weight: 600; */
+  color: #111111;
+  font-family: "LHR Firehouse";
 }
 
 .sand__meter {
-  width: 60%;
+  width: 80%;
   height: 100%;
   position: relative;
 }
 
 .sand__meter__bar {
-    width: 100%;
-    height:100%;
-    background: #f2f2f2;
-    overflow: hidden;
-    border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 30px;
 }
 
 .sand__meter__bar__fill {
-    width: calc(40% * 100 / 48);
-    height: 100%;
-    background: #ffc014;
-    border-radius: 30px;
-    transition: width 0.5s ease-in-out;
+  width: calc(40% * 100 / 48);
+  height: 100%;
+  background: #ffc014;
+  border-radius: 30px;
+  transition: width 0.5s ease-in-out;
 }

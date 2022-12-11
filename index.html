@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="tile.css" />
     <link rel="stylesheet" href="sand.css" />
     <link rel="stylesheet" href="card.css" />
+    <link rel="stylesheet" href="storm.css" />
     <!-- End styles -->
     <script src="functions.js"></script>
     <!-- Components -->
@@ -27,17 +28,22 @@
 
   <body>
     <div class="app">
+      <div id="Title">FORBIDDEN DESERT</div>
       <div id="board"></div>
-      <div class="ui">
-        <div id="decks"></div>
-        <div class="sand__container">
-          <span class="sand__title">SANDS LEFT: (40/48)</span>
-          <div class="sand__meter">
-            <div class="sand__meter__bar">
-              <div class="sand__meter__bar__fill"></div>
-            </div>
+      <div class="sand__container">
+        <span class="sand__title">SANDS LEFT: (40/48)</span>
+        <div class="sand__meter">
+          <div class="sand__meter__bar">
+            <div class="sand__meter__bar__fill"></div>
           </div>
         </div>
+      </div>
+      <div id="storm__decks"></div>
+      <div id="gear__decks"></div>
+      <div id="water__level"><button onclick="moveStormMeter()">Test</button></div>
+      <div id="actions"></div>
+      <div id="ship"></div>
+      <div id="storm__meter">
       </div>
     </div>
   </body>

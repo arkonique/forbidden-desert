@@ -181,8 +181,79 @@ function updateSandMeter(grid) {
   sandText.innerHTML = `SANDS LEFT: (${48 - currentSand}/48)`;
 }
 
-function moveGrid(dir,num,app,grid) {
+function moveGrid(dir, num, app, grid) {
   grid.moveStorm(dir, num);
   app.innerHTML = grid.html;
   grid.init();
+}
+
+function stormMeter(num, difficulty) {
+  const difficultyObj = {
+    novice: 0,
+    normal: 1,
+    elite: 2,
+    legendary: 3,
+  };
+  const playerNum = {
+    p2: [2, 3, 3, 3],
+    p3: [2, 3, 3, 3, 3],
+    p4: [2, 3, 3, 3, 3],
+    p5: [2, 3, 3, 3, 3, 3],
+  };
+
+  const all = [4, 4, 4, 4, 5, 5, 5, 6, 6];
+
+  const meterArray = [
+    ...playerNum[`p${num}`].slice(difficultyObj[difficulty]),
+    ...all,
+  ];
+
+  const meterHtml = `
+  <div class="storm__meter__bar">
+    <div class="notick m${meterArray[0]}"></div>
+    ${meterArray
+      .map((x, i) => {
+        if (meterArray[i] === meterArray[i + 1]) {
+          return `<div class="tick m${meterArray[i]}">${meterArray[i]}</div>`;
+        } else {
+          return `<div class="tick m${meterArray[i]}-5">${meterArray[i+1]}</div>`;
+        }
+      })
+      .join("")}
+    <div class="arrow">
+      <img src="arrow_clip.png" alt="arrow" />
+    </div>
+  </div>
+  `;
+  document.getElementById("storm__meter").innerHTML = meterHtml;
+  document
+    .querySelector(".storm__meter__bar")
+    .style.setProperty("--ticks", meterArray.length + 1);
+
+  document.querySelector(
+    ".m6-5"
+  ).innerHTML = `<i class="fas fa-skull-crossbones"></i>`;
+  return meterArray;
+}
+
+function moveStormMeter(action="move") {
+  const pos = parseInt(
+    getComputedStyle(document.querySelector(".arrow")).getPropertyValue(
+      "--position"
+    )
+  )
+
+  const ticks = parseInt(
+    getComputedStyle(document.querySelector(".storm__meter__bar")).getPropertyValue(
+      "--ticks"
+    )
+  )
+  if (pos >= ticks - 1) return "dead";
+  if (action === "move"){
+    document.querySelector(".arrow").style.setProperty("--position", pos + 1);
+  }
+  
+  current = document.querySelector(".storm__meter__bar div:nth-child(" + (pos+1) + ")").innerHTML;
+  console.log(current)
+  return current;
 }

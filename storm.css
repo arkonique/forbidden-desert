@@ -1,0 +1,89 @@
+#storm__meter {
+  margin-right: 15px;
+}
+
+.storm__meter__bar {
+  --ticks: 14;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(var(--ticks), 1fr);
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  transform: rotate(180deg);
+  position: relative;
+}
+
+.tick {
+  border-bottom: 3px solid white;
+  transform: rotate(180deg);
+  cursor: default;
+}
+
+.m2 {
+    background-color: orange;
+}
+
+.m2-5 {
+    background: linear-gradient(0deg, orange 50%, #b97800 50%);
+}
+
+.m3 {
+    background-color: #b97800;
+}
+
+.m3-5 {
+    background: linear-gradient(0deg, #b97800 50%, #db6100 50%);
+}
+
+.m4 {
+    background-color: #db6100;
+}
+
+.m4-5 {
+    background: linear-gradient(0deg, #db6100 50%, #d53700 50%);
+}
+
+.m5 {
+    background-color: #d53700;
+}
+
+.m5-5 {
+    background: linear-gradient(0deg, #d53700 50%, red 50%);
+}
+
+.m6,.m6-5 {
+    background-color: red;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.m2,.m3,.m4,.m5,.m6,.m2-5,.m3-5,.m4-5,.m5-5 {
+    color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: 0.2s
+}
+
+.m2:hover,.m3:hover,.m4:hover,.m5:hover,.m6:hover {
+    color: white;
+}
+
+.arrow {
+    --position: 1;
+    position: absolute;
+    left: 0;
+    transform: rotate(180deg) translateX(-25%) translateY(50%);
+    top: calc(100% / var(--ticks) * var(--position));
+    transition: 0.2s;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.685));
+}
+
+.arrow:hover {
+    transform: rotate(180deg) translateX(0%) translateY(50%);
+}
