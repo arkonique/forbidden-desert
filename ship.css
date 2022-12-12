@@ -1,0 +1,68 @@
+.ship__container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  border-radius: 20px;
+  border: 3px dashed grey;
+  background: #e9e9e9;
+}
+
+.ship_pieces {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-left: 5%;
+}
+
+.ship_pieces img {
+width: 20%;
+padding: 2%;
+filter: contrast(0);
+transition: 0.2s;
+}
+
+.ship_pieces img:hover {
+  filter: contrast(1);
+}
+
+.ship_sides {
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 5s infinite;
+}
+
+.ship_full {
+    grid-area: 1 / 1 / 2 / 2;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    transform: scale(0);
+    transition: 0.2s;
+    transform-origin: center;
+}
+
+.revealed {
+    transform: scale(1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

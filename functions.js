@@ -1,3 +1,9 @@
+const DEF_DELAY = 1000;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms || DEF_DELAY));
+}
+
 function randomPosition(n, excludedPositions = []) {
   let randomPositions = [];
   let x, y;
@@ -216,7 +222,7 @@ function stormMeter(num, difficulty) {
         if (meterArray[i] === meterArray[i + 1]) {
           return `<div class="tick m${meterArray[i]}">${meterArray[i]}</div>`;
         } else {
-          return `<div class="tick m${meterArray[i]}-5">${meterArray[i+1]}</div>`;
+          return `<div class="tick m${meterArray[i]}-5">${meterArray[i]}</div>`;
         }
       })
       .join("")}
@@ -236,24 +242,115 @@ function stormMeter(num, difficulty) {
   return meterArray;
 }
 
-function moveStormMeter(action="move") {
+function stormMeterLevel(action = "move") {
   const pos = parseInt(
     getComputedStyle(document.querySelector(".arrow")).getPropertyValue(
       "--position"
     )
-  )
+  );
 
   const ticks = parseInt(
-    getComputedStyle(document.querySelector(".storm__meter__bar")).getPropertyValue(
-      "--ticks"
-    )
-  )
+    getComputedStyle(
+      document.querySelector(".storm__meter__bar")
+    ).getPropertyValue("--ticks")
+  );
   if (pos >= ticks - 1) return "dead";
-  if (action === "move"){
+  if (action === "move") {
     document.querySelector(".arrow").style.setProperty("--position", pos + 1);
   }
-  
-  current = document.querySelector(".storm__meter__bar div:nth-child(" + (pos+1) + ")").innerHTML;
-  console.log(current)
+
+  current = document.querySelector(
+    ".storm__meter__bar div:nth-child(" + (pos + 1) + ")"
+  ).innerHTML;
   return current;
+}
+
+async function drawStormCard(deck) {
+  document.querySelector(".draw_storm").style.display = "none";
+  const dirObj = {
+    u: "up",
+    d: "down",
+    l: "left",
+    r: "right",
+  };
+  
+  const currentStorm = stormMeterLevel("level");
+  drawnCards = deck.draw(currentStorm);
+  let dl = drawnCards.length;
+  for (let i = 0; i < dl; i++) {
+    let card = [...document.querySelectorAll(".storm_deck .card")].slice(-1)[0];
+    let cardStr = card
+    .querySelector("img")
+      .getAttribute("src")
+      .split("/")
+      .slice(-1)[0]
+      .split(".")[0];
+      // perform actions based on card
+      if (cardStr === "sbd") {
+        // lower water level for all players
+      } else if (cardStr === "spu") {
+        stormMeterLevel("move");
+      } else {
+        let dir = dirObj[cardStr[0]];
+        let num = parseInt(cardStr[1]);
+        moveGrid(dir, num, app, grid);
+      }
+      
+      deck.discard(cardStr);
+      card.classList.toggle("flipped");
+      await sleep();
+      document.querySelector(".storm_discarded").innerHTML += card.outerHTML;
+      card.remove();
+    }
+    
+    if (dl < currentStorm) {
+      let stormCards = createStormDeck();
+      stormDeck = new Deck(stormCards, [], "storm");
+      stormDeck.shuffle();
+      let sdecks = document.getElementById("storm__decks");
+      sdecks.innerHTML =
+      "<div class='draw_storm' onclick='drawStormCard(stormDeck)'>Draw</div>";
+      sdecks.innerHTML += stormDeck.deckHtml;
+      sdecks.innerHTML += stormDeck.discardedHtml;
+      
+      drawnCards = deck.draw(currentStorm - dl);
+      for (let i = 0; i < currentStorm - dl; i++) {
+        let card = [...document.querySelectorAll(".storm_deck .card")].slice(
+          -1
+          )[0];
+          let cardStr = card
+          .querySelector("img")
+          .getAttribute("src")
+          .split("/")
+          .slice(-1)[0]
+          .split(".")[0];
+          // perform actions based on card
+      if (cardStr === "sbd") {
+        // lower water level for all players
+      } else if (cardStr === "spu") {
+        stormMeterLevel("move");
+      } else {
+        let dir = dirObj[cardStr[0]];
+        let num = parseInt(cardStr[1]);
+        moveGrid(dir, num, app, grid);
+      }
+
+      deck.discard(cardStr);
+      card.classList.toggle("flipped");
+      await sleep();
+      document.querySelector(".storm_discarded").innerHTML += card.outerHTML;
+      card.remove();
+    }
+  }
+  document.querySelector(".draw_storm").style.display = "";
+}
+
+async function drawGearCard(deck) {
+  // draw gear card and give it to player
+}
+
+function openCloseTray(type) {
+  document.querySelector(`#tray`).classList.toggle("hidden_tray");
+  html = document.querySelector(`.${type}_discarded`).innerHTML;
+  document.querySelector(`#tray__cards`).innerHTML = html;
 }

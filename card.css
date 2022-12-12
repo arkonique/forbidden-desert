@@ -1,58 +1,139 @@
 :root {
-    --card: 35%;
+  --card: 100%;
+  --aspect-ratio-constant: 14.3216783vw
+    /* Aspect ratio according to the grid area for my cards */;
 }
 
-.deck{
-    display: grid;
-    filter: drop-shadow(0px 0px 6px rgba(0,0,0,0.4));
-    margin-left: 5%;
+.deck,
+.discarded {
+  display: grid;
+  filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.4));
+  margin-left: 5%;
+  width: 40%;
+  height: 100%;
+  transition: 0.2s;
+}
+
+.discarded:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .card {
-    width: var(--card);
-    position: relative;
-    perspective: 1000px;
-    /* filter: drop-shadow(0px 0px 6px black); */
-    transition: 0.2s;
-    height: auto;
-    border-radius: 40px;
-    grid-area: 1 / 1 / 2 / 2;
+  width: var(--card);
+  position: relative;
+  perspective: 1000px;
+  /* filter: drop-shadow(0px 0px 6px black); */
+  transition: 0.2s;
+  height: auto;
+  border-radius: 40px;
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 .card__inner {
-    width: 100%;
-    height: auto;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-    display: grid;
-    position: relative;
-    border-radius: 20px;
+  width: 100%;
+  height: auto;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  display: grid;
+  position: relative;
+  border-radius: 20px;
 }
 .card__face {
-    width: 100%;
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-    transition: transform 0.5s;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 10px;
-    overflow: hidden;
-    display: block;
-    grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  transition: transform 0.5s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+  grid-area: 1 / 1 / 2 / 2;
 }
 
-
 .card__face--front {
-    z-index: 0;
-    grid-area: 1 / 1 / 2 / 2;
-    transform: rotateY(180deg);
+  z-index: 0;
+  grid-area: 1 / 1 / 2 / 2;
+  transform: rotateY(180deg);
 }
 
 .card__face--back {
-    z-index: 1;
+  z-index: 1;
 }
 
 .flipped .card__inner {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.draw_storm,.draw_gear {
+  width: 40%;
+  height: var(--aspect-ratio-constant);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fdce85;
+  margin-left: 5%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-size: 2rem;
+  border-radius: 10px;
+  font-family: "LHR Firehouse";
+  opacity: 0;
+  transition: 0.2s;
+  cursor: grab;
+}
+
+.draw_gear{
+    background: #b3e5fc;
+    color: blue;
+}
+
+.draw_storm:hover,.draw_gear:hover {
+  opacity: 0.6;
+}
+
+#tray {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: 0.2s;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    filter: none;
+  }
+  
+  #tray__cards {
+    width: 60%;
+    height: 40%;
+    background-color: white;
+    display: block;
+    align-items: center;
+    padding: 15px 12px 0 12px;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+  
+  .hidden_tray {
+      transform: scale(0);
+      backdrop-filter: blur(0px);
+      opacity: 0;
+      filter: blur(10px);
+  }
+
+
+#tray__cards .card {
+    width: 20%;
+    margin: 10px;
+    display: inline-block;
 }

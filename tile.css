@@ -282,9 +282,21 @@ img {
     transform: rotateY(180deg);
 }
 
-.tile[data-is-storm='true'] .tile__face {
-    border-radius: 100%;
+.storm .tile__face {
+    /* border-radius: 100%; */
     /* display: none; */
+}
+
+.storm {
+    filter: none;
+}
+
+.storm img {
+    filter: invert(43%) sepia(17%) saturate(2727%) hue-rotate(350deg) brightness(91%) contrast(84%)
+}
+
+.storm:hover {
+    transform: scale(1);
 }
 
 .players {

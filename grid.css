@@ -10,4 +10,5 @@
     column-gap: var(--gap);
     position: relative;
     box-sizing: border-box;
+    color: #af611e;
 }

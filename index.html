@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="sand.css" />
     <link rel="stylesheet" href="card.css" />
     <link rel="stylesheet" href="storm.css" />
+    <link rel="stylesheet" href="ship.css" />
     <!-- End styles -->
     <script src="functions.js"></script>
     <!-- Components -->
@@ -40,10 +41,33 @@
       </div>
       <div id="storm__decks"></div>
       <div id="gear__decks"></div>
-      <div id="water__level"><button onclick="moveStormMeter()">Test</button></div>
+      <div id="water__level">
+        <button onclick="drawStormCard(stormDeck)">Test</button>
+      </div>
       <div id="actions"></div>
-      <div id="ship"></div>
-      <div id="storm__meter">
+      <div id="ship">
+        <div class="ship__container">
+          <div class="ship_pieces">
+            <img src="fan_flat.png" class="ship_parts" />
+            <img src="compass_flat.png" class="ship_parts" />
+            <img src="engine_flat.png" class="ship_parts" />
+            <img src="obelisk_flat.png" class="ship_parts" />
+          </div>
+          <div class="ship_sides">
+            <img src="obelisk_side.png" class="ship_full" />
+            <img src="engine_side.png" class="ship_full" />
+            <img src="compass_side.png" class="ship_full" />
+            <img src="ship_side.png" class="ship_full revealed" />
+            <img src="fan_side.png" class="ship_full" />
+          </div>
+        </div>
+      </div>
+      <div id="storm__meter"></div>
+      <div id="tray" class="hidden_tray">
+        <div id="tray__cards"></div>
+        <div class="close" onclick="openCloseTray('storm')">
+          <i class="fa-solid fa-square-xmark"></i>
+        </div>
       </div>
     </div>
   </body>

@@ -1,7 +1,11 @@
 @font-face {
-    font-family: 'LHR Firehouse';
-    font-style: normal;
-    src: url('LHF Fire House.ttf');
+  font-family: "LHR Firehouse";
+  font-style: normal;
+  src: url("LHF Fire House.ttf");
+}
+
+* {
+  user-select: none;
 }
 
 body {
@@ -15,33 +19,32 @@ body {
   grid-auto-columns: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: 
+  grid-template-areas:
     "Storm-meter Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title"
-    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Storm-deck Storm-deck Storm-deck Storm-deck Storm-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
-    "Storm-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter"; 
-    height: 100vh;
+    "Storm-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter";
+  height: 100vh;
 }
 
 #storm__meter {
   grid-area: Storm-meter;
 }
 
-
 #Title {
   grid-area: Title;
   display: flex;
   align-items: center;
   justify-content: left;
-  font-family: 'LHR Firehouse';
+  font-family: "LHR Firehouse";
   font-size: 5rem;
   color: #e77800;
 }
@@ -63,6 +66,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: left;
+  position: relative;
 }
 
 #gear__decks {
@@ -70,10 +74,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: left;
+  position: relative;
 }
 
 #ship {
   grid-area: Ship;
+  display: flex;
+  height: 95%;
+  margin: 0 10px;
 }
 
 #board {
@@ -81,4 +89,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 3rem;
+  -webkit-text-stroke: 5px red;
+  transition: 0.2s ease-in-out;
+}
+
+.close:hover{
+  cursor: pointer;
+  transform: scale(1.1);
 }
