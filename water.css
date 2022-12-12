@@ -1,0 +1,61 @@
+#water__level {
+  background-color: #626262;
+  -webkit-mask-image: url(water_mask2.png);
+  mask-image: url(water_mask2.png);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.water__level__container,
+.cap__container {
+  width: 100%;
+  height: 100%;
+  background-image: url("water.png");
+  background-size: 400% 100%;
+  background-repeat: repeat-x;
+  filter: invert(52%) sepia(96%) saturate(329%) hue-rotate(170deg)
+    brightness(91%) contrast(103%);
+  animation: moveWater 5s linear infinite;
+  position: absolute;
+  top: 2%;
+  left: 0;
+  transition: 0.2s;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
+  /* font-size: 5rem; */
+  /* color: black; */
+  /* font-family: 'LHR Firehouse'; */
+}
+
+.cap__container {
+  background-image: url("x.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: none;
+  animation: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: white;
+  font-family: 'LHR Firehouse';
+  padding-left: 10px;
+}
+
+@keyframes moveWater {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -400% 0;
+  }
+}

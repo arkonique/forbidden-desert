@@ -29,8 +29,8 @@ body {
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Water-level"
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship ."
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship ."
     "Storm-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter";
   height: 100vh;
 }
@@ -67,6 +67,7 @@ body {
   align-items: center;
   justify-content: left;
   position: relative;
+  height: var(--aspect-ratio-constant);
 }
 
 #gear__decks {
@@ -75,6 +76,7 @@ body {
   align-items: center;
   justify-content: left;
   position: relative;
+  height: var(--aspect-ratio-constant);
 }
 
 #ship {

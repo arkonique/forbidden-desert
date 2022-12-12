@@ -2,6 +2,7 @@
   --card: 100%;
   --aspect-ratio-constant: 14.3216783vw
     /* Aspect ratio according to the grid area for my cards */;
+  --inactive: #b3b3b3;
 }
 
 .deck,
@@ -12,11 +13,48 @@
   width: 40%;
   height: 100%;
   transition: 0.2s;
+  border-radius: 10px;
+  /* border: 3px dashed var(--inactive); */
 }
 
-.discarded:hover {
+.discarded {
+  border: 3px dashed var(--inactive);
+  filter: none;
+  position: relative;
+}
+
+.discarded::after,
+.discarded::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "DISCARD PILE \A (click to see all discarded cards)";
+  white-space: pre-wrap;
+  font-size: 1.5rem;
+  font-family: "LHR Firehouse";
+  color: #00000000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #b3b3b300;
+  transition: 0.2s;
+}
+
+.discarded::before {
+  content: "DISCARD PILE";
+  color: var(--inactive);
+  font-size: 2rem;
+  text-align: center;
+  width: 10vw;
+  justify-content: center;
+}
+
+.discarded:hover::after {
   cursor: pointer;
-  transform: scale(1.1);
+  background-color: #b3b3b380;
+  color: #000000;
 }
 
 .card {
@@ -67,9 +105,10 @@
   transform: rotateY(180deg);
 }
 
-.draw_storm,.draw_gear {
+.draw_storm,
+.draw_gear {
   width: 40%;
-  height: var(--aspect-ratio-constant);
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -88,52 +127,75 @@
   cursor: grab;
 }
 
-.draw_gear{
-    background: #b3e5fc;
-    color: blue;
+.draw_gear {
+  background: #b3e5fc;
+  color: blue;
 }
 
-.draw_storm:hover,.draw_gear:hover {
+.draw_storm:hover,
+.draw_gear:hover {
   opacity: 0.6;
 }
 
 #tray {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    transition: 0.2s;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    filter: none;
-  }
-  
-  #tray__cards {
-    width: 60%;
-    height: 40%;
-    background-color: white;
-    display: block;
-    align-items: center;
-    padding: 15px 12px 0 12px;
-    overflow-x: scroll;
-    white-space: nowrap;
-  }
-  
-  .hidden_tray {
-      transform: scale(0);
-      backdrop-filter: blur(0px);
-      opacity: 0;
-      filter: blur(10px);
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: 0.2s;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  filter: none;
+}
 
+#tray__cards {
+  width: 60%;
+  height: 40%;
+  background-color: white;
+  display: block;
+  align-items: center;
+  padding: 15px 12px 0 12px;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #00000020;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f400;
+  width: 10px;
+}
+
+#tray__cards:hover::-webkit-scrollbar-track {
+  background: #f4f4f4;
+}
+
+#tray__cards:hover::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
+
+.hidden_tray {
+  transform: scale(0);
+  backdrop-filter: blur(0px);
+  opacity: 0;
+  filter: blur(10px);
+}
 
 #tray__cards .card {
-    width: 20%;
-    margin: 10px;
-    display: inline-block;
+  width: 20%;
+  margin: 10px;
+  display: inline-block;
 }
