@@ -391,3 +391,14 @@ img {
     font-weight: 700;
     z-index: 1;
 }
+
+.piece {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    padding: 10%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

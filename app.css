@@ -29,8 +29,8 @@ body {
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
     "Storm-meter Board Board Board Board Board Board Board Board Gear-deck Gear-deck Gear-deck Gear-deck Gear-deck Actions Actions Actions Actions Actions Water-level"
-    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship ."
-    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship ."
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Tests"
+    "Storm-meter Board Board Board Board Board Board Board Board Ship Ship Ship Ship Ship Ship Ship Ship Ship Ship Tests"
     "Storm-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter Sand-meter";
   height: 100vh;
 }
@@ -106,4 +106,8 @@ body {
 .close:hover{
   cursor: pointer;
   transform: scale(1.1);
+}
+
+#tests {
+  grid-area: Tests;
 }

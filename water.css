@@ -12,6 +12,9 @@
 
 .water__level__container,
 .cap__container {
+  --total-water: 4;
+  --current-water: 4;
+  --water-height: calc(85% - 83% * var(--current-water) / var(--total-water));
   width: 100%;
   height: 100%;
   background-image: url("water.png");
@@ -21,7 +24,7 @@
     brightness(91%) contrast(103%);
   animation: moveWater 5s linear infinite;
   position: absolute;
-  top: 2%;
+  top: var(--water-height);
   left: 0;
   transition: 0.2s;
   /* display: flex; */
@@ -40,14 +43,14 @@
   filter: none;
   animation: none;
   position: absolute;
-  top: 0;
+  top: 0%;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 5rem;
   color: white;
-  font-family: 'LHR Firehouse';
+  font-family: "LHR Firehouse";
   padding-left: 10px;
 }
 

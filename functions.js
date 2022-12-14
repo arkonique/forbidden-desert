@@ -4,6 +4,10 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms || DEF_DELAY));
 }
 
+function intersect(a,b) {
+  return [...a].filter(value => [...b].includes(value)).length && true || false
+}
+
 function randomPosition(n, excludedPositions = []) {
   let randomPositions = [];
   let x, y;
@@ -273,58 +277,58 @@ async function drawStormCard(deck) {
     l: "left",
     r: "right",
   };
-  
+
   const currentStorm = stormMeterLevel("level");
   drawnCards = deck.draw(currentStorm);
   let dl = drawnCards.length;
   for (let i = 0; i < dl; i++) {
     let card = [...document.querySelectorAll(".storm_deck .card")].slice(-1)[0];
     let cardStr = card
-    .querySelector("img")
+      .querySelector("img")
       .getAttribute("src")
       .split("/")
       .slice(-1)[0]
       .split(".")[0];
-      // perform actions based on card
-      if (cardStr === "sbd") {
-        // lower water level for all players
-      } else if (cardStr === "spu") {
-        stormMeterLevel("move");
-      } else {
-        let dir = dirObj[cardStr[0]];
-        let num = parseInt(cardStr[1]);
-        moveGrid(dir, num, app, grid);
-      }
-      
-      deck.discard(cardStr);
-      card.classList.toggle("flipped");
-      await sleep();
-      document.querySelector(".storm_discarded").innerHTML += card.outerHTML;
-      card.remove();
+    // perform actions based on card
+    if (cardStr === "sbd") {
+      // lower water level for all players
+    } else if (cardStr === "spu") {
+      stormMeterLevel("move");
+    } else {
+      let dir = dirObj[cardStr[0]];
+      let num = parseInt(cardStr[1]);
+      moveGrid(dir, num, app, grid);
     }
-    
-    if (dl < currentStorm) {
-      let stormCards = createStormDeck();
-      stormDeck = new Deck(stormCards, [], "storm");
-      stormDeck.shuffle();
-      let sdecks = document.getElementById("storm__decks");
-      sdecks.innerHTML =
+
+    deck.discard(cardStr);
+    card.classList.toggle("flipped");
+    await sleep();
+    document.querySelector(".storm_discarded").innerHTML += card.outerHTML;
+    card.remove();
+  }
+
+  if (dl < currentStorm) {
+    let stormCards = createStormDeck();
+    stormDeck = new Deck(stormCards, [], "storm");
+    stormDeck.shuffle();
+    let sdecks = document.getElementById("storm__decks");
+    sdecks.innerHTML =
       "<div class='draw_storm' onclick='drawStormCard(stormDeck)'>Draw</div>";
-      sdecks.innerHTML += stormDeck.deckHtml;
-      sdecks.innerHTML += stormDeck.discardedHtml;
-      
-      drawnCards = deck.draw(currentStorm - dl);
-      for (let i = 0; i < currentStorm - dl; i++) {
-        let card = [...document.querySelectorAll(".storm_deck .card")].slice(
-          -1
-          )[0];
-          let cardStr = card
-          .querySelector("img")
-          .getAttribute("src")
-          .split("/")
-          .slice(-1)[0]
-          .split(".")[0];
-          // perform actions based on card
+    sdecks.innerHTML += stormDeck.deckHtml;
+    sdecks.innerHTML += stormDeck.discardedHtml;
+
+    drawnCards = deck.draw(currentStorm - dl);
+    for (let i = 0; i < currentStorm - dl; i++) {
+      let card = [...document.querySelectorAll(".storm_deck .card")].slice(
+        -1
+      )[0];
+      let cardStr = card
+        .querySelector("img")
+        .getAttribute("src")
+        .split("/")
+        .slice(-1)[0]
+        .split(".")[0];
+      // perform actions based on card
       if (cardStr === "sbd") {
         // lower water level for all players
       } else if (cardStr === "spu") {
@@ -353,4 +357,57 @@ function openCloseTray(type) {
   document.querySelector(`#tray`).classList.toggle("hidden_tray");
   html = document.querySelector(`.${type}_discarded`).innerHTML;
   document.querySelector(`#tray__cards`).innerHTML = html;
+}
+
+function createWaterLevel(num) {
+  const cap = document.querySelector(".cap__container");
+  document.getElementById("water__level").style.background = "#626262";
+  cap.innerHTML = num;
+  document
+    .querySelector(".water__level__container")
+    .style.setProperty("--total-water", num);
+  document
+    .querySelector(".water__level__container")
+    .style.setProperty("--current-water", num);
+}
+
+function lowerWaterLevel() {
+  const cap = document.querySelector(".cap__container");
+  const current = parseInt(
+    getComputedStyle(
+      document.querySelector(".water__level__container")
+    ).getPropertyValue("--current-water")
+  );
+  document
+    .querySelector(".water__level__container")
+    .style.setProperty("--current-water", current - 1);
+  if (current > 0) {
+    cap.innerHTML = current - 1;
+  } else {
+    // game over
+    cap.innerHTML = `<i class="fas fa-skull-crossbones"></i>`;
+    document.getElementById("water__level").style.background = "red";
+    document.querySelector(".cap__container i").style.fontSize = "3rem";
+  }
+}
+
+function increaseWaterLevel() {
+  const cap = document.querySelector(".cap__container");
+  const current = parseInt(
+    getComputedStyle(
+      document.querySelector(".water__level__container")
+    ).getPropertyValue("--current-water")
+  );
+
+  const total = parseInt(
+    getComputedStyle(
+      document.querySelector(".water__level__container")
+    ).getPropertyValue("--total-water")
+  );
+  if (current >= total) return;
+  if (current < 0) return;
+  document
+    .querySelector(".water__level__container")
+    .style.setProperty("--current-water", current + 1);
+  cap.innerHTML = current + 1;
 }

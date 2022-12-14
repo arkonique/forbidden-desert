@@ -8,6 +8,7 @@ class Grid {
   players = [...Array(5)].map((e) => Array(5).fill([]));
   sands = [...Array(5)].map((e) => Array(5).fill(0));
   states = [...Array(5)].map((e) => Array(5).fill(0));
+  pieces = [...Array(5)].map((e) => Array(5).fill(0));
   html;
   constructor(
     tiles = [...Array(5)].map((e) => Array(5).fill(0)),
@@ -15,7 +16,8 @@ class Grid {
     backs = [...Array(5)].map((e) => Array(5).fill("gear")),
     players = [...Array(5)].map((e) => Array(5).fill([])),
     sands = [...Array(5)].map((e) => Array(5).fill(0)),
-    states = [...Array(5)].map((e) => Array(5).fill(0))
+    states = [...Array(5)].map((e) => Array(5).fill(0)),
+    pieces = [...Array(5)].map((e) => Array(5).fill(0))
   ) {
     // Default values
     if (tiles === "default") {
@@ -95,7 +97,8 @@ class Grid {
             this.sands[i][j],
             this.states[i][j],
             { x: i, y: j },
-            passNo
+            passNo,
+            this.pieces[i][j]
           );
           this.html += this.tiles[i][j].html;
         }
@@ -109,6 +112,7 @@ class Grid {
     this.players = players;
     this.sands = sands;
     this.states = states;
+    this.pieces = pieces;
   }
 
   // Initialize the grid
@@ -117,8 +121,9 @@ class Grid {
     console.table(this.backs);
     console.table(this.players);
     console.table(this.sands);
-    console.table(this.states);
-    console.table(this.tiles);*/
+    console.table(this.states);*/
+    console.table(this.tiles);
+    this.resetSand();
     document.querySelector(".storm").classList.add("excavated");
     // Make sand count of storm tile 0
     // find storm tile
@@ -159,6 +164,7 @@ class Grid {
             tile.reduceSand();
             if (tile.canExcavate()) {
               tile.excavate();
+              tile.revealPiece(this.tiles);
             }
             // if tile.sand === -1 set this.sands[i][j] = 0 else set to tile.sand
             this.sands[i][j] = tile.sand === -1 ? 0 : tile.sand;
@@ -279,6 +285,7 @@ class Grid {
     let gearNo = 0;
     let notGearNo = -1;
     let passNo = 0;
+    this.resetSand();
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
         if (this.backs[i][j] === "gear") {
@@ -295,7 +302,8 @@ class Grid {
           this.sands[i][j],
           this.states[i][j],
           { x: i, y: j },
-          passNo
+          passNo,
+          this.pieces[i][j]
         );
         this.html += this.tiles[i][j].html;
       }
@@ -311,5 +319,17 @@ class Grid {
       });
     });
     return total;
+  }
+
+
+  // set sand to 0 wherever sand is -1
+  resetSand() {
+    this.tiles.forEach((row) => {
+      row.forEach((tile) => {
+        if (tile.sand === -1) {
+          tile.sand = 0;
+        }
+      });
+    });
   }
 }
